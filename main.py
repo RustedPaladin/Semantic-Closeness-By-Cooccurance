@@ -88,7 +88,7 @@ def purge_words_from_output(user_chosen_words, words_to_purge):
 
 
 #START
-txt = Path('nishe.txt').read_text()
+txt = Path('data.txt').read_text()
 
 nonwords = set({'.', '?', '!', ',', ':', ';', '-', '(', ')', '«', '»', '–', 'др'})
 text = Text_tokenized(exceptions_list = nonwords, verbose = verbose)
@@ -100,11 +100,7 @@ text.order_vocabulary()
 
 cooccurance_matrix = make_cooccurance_matrix(text)
 
-
-
-
 compressed_coocurance_matrix = compress_dimentions_PCA(cooccurance_matrix)
-
 
 #user_chosen_words = input_user_words(text.vocabulary)
 
@@ -115,7 +111,6 @@ unwanteds = []
 user_chosen_words = filter_by_word_pos(accepted_parts_of_speech, accepted_words_percentage, text)
 purge_words_from_output(user_chosen_words, words_to_purge = unwanteds)
 print(user_chosen_words)
-
 
 words_to_show_list = compile_points_list(compressed_coocurance_matrix, text,  user_chosen_words = user_chosen_words)
 #words_to_show_list = np.array(words_to_show_list)
